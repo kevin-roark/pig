@@ -27,6 +27,11 @@ body {
 }
 
 #pig1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
 }
@@ -49,6 +54,25 @@ body {
   bottom: 5px;
   opacity: 0.9;
   z-index: 3;
+  display: none;
+}
+
+#scrooge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#factory {
+  display: none;
+}
+
+#boosie {
   display: none;
 }
 
