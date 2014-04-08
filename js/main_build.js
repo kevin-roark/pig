@@ -773,12 +773,14 @@ $(function() {
       boosie.play();
       move();
       rotate();
+      kt.sepia($boosie, 90);
+      hueshift();
 
       function move() {
         $boosie.css('left', left + 'px');
         if(!movinleft) {
           left += 3;
-          if (left >= $(window).width() - $boosie.width() - 10)
+          if (left >= 200)
             movinleft = true;
         } else {
           left -= 3;
@@ -791,8 +793,14 @@ $(function() {
 
       var deg = 0;
       function rotate() {
-        kt.rotate($boosie, deg--);
-        setTimeout(rotate, kt.randInt(20, 10));
+        deg = (deg - 45) % 360;
+        kt.rotate($boosie, deg);
+        setTimeout(rotate, kt.randInt(600, 100));
+      }
+
+      function hueshift() {
+        kt.hutate($boosie, kt.randInt(180));
+        setTimeout(hueshift, kt.randInt(300, 100));
       }
 
       boosie.addEventListener('ended', function() {
@@ -818,7 +826,7 @@ $(function() {
         $factory.css('right', right + 'px');
         if(movinleft) {
           right += 3;
-          if (right >= $(window).width() - $factory.width() - 10)
+          if (right >= 200)
             movinleft = false;
         } else {
           right -= 3;
@@ -831,8 +839,9 @@ $(function() {
 
       var deg = 0;
       function rotate() {
-        kt.rotate($factory, deg++);
-        setTimeout(rotate, kt.randInt(20, 10));
+        deg = (deg + 45) % 360;
+        kt.rotate($factory, deg);
+        setTimeout(rotate, kt.randInt(600, 100));
       }
 
       factory.addEventListener('ended', function() {
@@ -846,8 +855,8 @@ $(function() {
 
     function startMoney() {
       scroogeit();
-      setTimeout(boosieit, 30000);
-      setTimeout(factoryit, 30000);
+      setTimeout(boosieit, 5000);
+      setTimeout(factoryit, 5000);
     }
 
   }
