@@ -461,7 +461,6 @@ $(function() {
 
   var numMedia = 6; // number of things to load
   var mediasReady = 0;
-  var sptime = 22; // time in s to start spig
 
   var p1active = false;
   var p2active = false;
@@ -684,7 +683,6 @@ $(function() {
     }
 
     $spig.show();
-    spig.currentTime = sptime;
     spig.play();
     spig.loop = true;
     setTimeout(grow, 15000);
