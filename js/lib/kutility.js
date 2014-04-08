@@ -189,7 +189,8 @@ Kutility.prototype.scale = function(el, x) {
  */
 Kutility.prototype.translate = function(el, x, y) {
   var ct = this.getTransform(el);
-  ct = ct.replace(/translate\(.*?\)/, '').replace('none', '');
+  console.log(ct);
+  ct = ct.replace(/matrix\(.*?\)/, '').replace('none', '');
 
   var t = ' translate(' + x + ', '  + y + ')';
   this.setTransform(el, ct + t);
@@ -225,6 +226,20 @@ Kutility.prototype.warp = function(el, d, x, y) {
   var s = ' skew(' + xd + ', ' + yd + ')';
 
   this.setTransform(el, ct + r + s);
+}
+
+/**
+ * scale by w, translate x y
+ *
+ * @api public
+ */
+Kutility.prototype.slaw = function(el, w, x, y) {
+  var ct = this.getTransform(el);
+  ct = ct.replace(/matrix\(.*?\)/, '').replace('none', '');
+
+  var s = ' scale(' + w + ',' + w + ')';
+  var t = ' translate(' + x + ', '  + y + ')';
+  this.setTransform(el, ct + s + t);
 }
 
 /**

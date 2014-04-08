@@ -238,7 +238,7 @@ $(function() {
     }
 
     function makeFreaky() {
-      $spig.fadeIn(1200, function() {
+      $spig.fadeIn(100, function() {
         setTimeout(function() {
           $spig.hide();
           if(spactive)
@@ -316,16 +316,19 @@ $(function() {
       function scroogeWarp() {
         // maybe add translation as well
         var p = Math.random();
-        if (p < 0.1) { //small
-          kt.scale($scrooge, Math.random());
+        if (p < 0.05) { //small
+          kt.scale($scrooge, Math.random() * 0.5);
         } else {
-          kt.scale($scrooge, Math.random() * 10);
+          var s = Math.random() * 10;
+          var xp = kt.randInt(100) - 50;
+          var yp = kt.randInt(100) - 50;
+          kt.slaw($scrooge, s, xp + '%', yp + '%');
         }
 
         setTimeout(function() {
-          kt.scale($scrooge, 1.0);
-          setTimeout(scroogeWarp, kt.randInt(500, 200));
-        }, kt.randInt(350, 100));
+          kt.slaw($scrooge, 1.0, '0%', '0%');
+          setTimeout(scroogeWarp, kt.randInt(300, 150));
+        }, kt.randInt(300, 150));
       }
 
       function scroogeInvert() {

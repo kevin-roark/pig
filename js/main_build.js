@@ -190,7 +190,8 @@ Kutility.prototype.scale = function(el, x) {
  */
 Kutility.prototype.translate = function(el, x, y) {
   var ct = this.getTransform(el);
-  ct = ct.replace(/translate\(.*?\)/, '').replace('none', '');
+  console.log(ct);
+  ct = ct.replace(/matrix\(.*?\)/, '').replace('none', '');
 
   var t = ' translate(' + x + ', '  + y + ')';
   this.setTransform(el, ct + t);
@@ -226,6 +227,20 @@ Kutility.prototype.warp = function(el, d, x, y) {
   var s = ' skew(' + xd + ', ' + yd + ')';
 
   this.setTransform(el, ct + r + s);
+}
+
+/**
+ * scale by w, translate x y
+ *
+ * @api public
+ */
+Kutility.prototype.slaw = function(el, w, x, y) {
+  var ct = this.getTransform(el);
+  ct = ct.replace(/matrix\(.*?\)/, '').replace('none', '');
+
+  var s = ' scale(' + w + ',' + w + ')';
+  var t = ' translate(' + x + ', '  + y + ')';
+  this.setTransform(el, ct + s + t);
 }
 
 /**
@@ -645,7 +660,7 @@ $(function() {
     }
 
     function makeFreaky() {
-      $spig.fadeIn(1200, function() {
+      $spig.fadeIn(100, function() {
         setTimeout(function() {
           $spig.hide();
           if(spactive)
@@ -723,16 +738,19 @@ $(function() {
       function scroogeWarp() {
         // maybe add translation as well
         var p = Math.random();
-        if (p < 0.1) { //small
-          kt.scale($scrooge, Math.random());
+        if (p < 0.05) { //small
+          kt.scale($scrooge, Math.random() * 0.5);
         } else {
-          kt.scale($scrooge, Math.random() * 10);
+          var s = Math.random() * 10;
+          var xp = kt.randInt(100) - 50;
+          var yp = kt.randInt(100) - 50;
+          kt.slaw($scrooge, s, xp + '%', yp + '%');
         }
 
         setTimeout(function() {
-          kt.scale($scrooge, 1.0);
-          setTimeout(scroogeWarp, kt.randInt(500, 200));
-        }, kt.randInt(350, 100));
+          kt.slaw($scrooge, 1.0, '0%', '0%');
+          setTimeout(scroogeWarp, kt.randInt(300, 150));
+        }, kt.randInt(300, 150));
       }
 
       function scroogeInvert() {
@@ -828,8 +846,8 @@ $(function() {
 
     function startMoney() {
       scroogeit();
-      setTimeout(boosieit, 5000);
-      setTimeout(factoryit, 5000);
+      setTimeout(boosieit, 30000);
+      setTimeout(factoryit, 30000);
     }
 
   }
