@@ -243,6 +243,20 @@ Kutility.prototype.slaw = function(el, w, x, y) {
 }
 
 /**
+ * scale by w, rotate by x
+ *
+ * @api public
+ */
+Kutility.prototype.straw = function(el, w, x) {
+  var ct = this.getTransform(el);
+  ct = ct.replace(/matrix\(.*?\)/, '').replace('none', '');
+
+  var s = ' scale(' + w + ',' + w + ')';
+  var r = ' rotate(' + x + 'deg)';
+  this.setTransform(el, ct + s + r);
+}
+
+/**
  * Add filter to element with all the lame browser prefixes.
  *
  * @api public

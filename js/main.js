@@ -351,8 +351,8 @@ $(function() {
       boosie.play();
       move();
       rotate();
-      kt.sepia($boosie, 90);
       hueshift();
+      kt.saturate($boosie, 150);
 
       function move() {
         $boosie.css('left', left + 'px');
@@ -372,12 +372,12 @@ $(function() {
       var deg = 0;
       function rotate() {
         deg = (deg - 45) % 360;
-        kt.rotate($boosie, deg);
+        kt.straw($boosie, (Math.random() * 0.9) + 1, deg);
         setTimeout(rotate, kt.randInt(600, 100));
       }
 
       function hueshift() {
-        kt.hutate($boosie, kt.randInt(180));
+        kt.hutate($boosie, kt.randInt(90));
         setTimeout(hueshift, kt.randInt(300, 100));
       }
 
@@ -399,6 +399,7 @@ $(function() {
       factory.play();
       move();
       rotate();
+      kt.saturate($factory, 150);
 
       function move() {
         $factory.css('right', right + 'px');
@@ -418,7 +419,7 @@ $(function() {
       var deg = 0;
       function rotate() {
         deg = (deg + 45) % 360;
-        kt.rotate($factory, deg);
+        kt.straw($factory, (Math.random() * 0.9) + 1, deg);
         setTimeout(rotate, kt.randInt(600, 100));
       }
 
@@ -433,8 +434,8 @@ $(function() {
 
     function startMoney() {
       scroogeit();
-      setTimeout(boosieit, 5000);
-      setTimeout(factoryit, 5000);
+      setTimeout(boosieit, 30000);
+      setTimeout(factoryit, 30000);
     }
 
   }
