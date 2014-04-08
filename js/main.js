@@ -314,6 +314,7 @@ $(function() {
       scrooge.loop = true;
 
       function scroogeWarp() {
+        // maybe add translation as well
         var p = Math.random();
         if (p < 0.1) { //small
           kt.scale($scrooge, Math.random());
@@ -340,17 +341,88 @@ $(function() {
     }
 
     function boosieit() {
-      //boosie.play();
+      $boosie.show();
+      boosie.loop = true;
+      var left = 40;
+      var movinleft = false;
+      boosie.play();
+      move();
+      rotate();
+
+      function move() {
+        $boosie.css('left', left + 'px');
+        if(!movinleft) {
+          left += 3;
+          if (left >= $(window).width() - $boosie.width() - 10)
+            movinleft = true;
+        } else {
+          left -= 3;
+          if (left <= 40)
+            movinleft = false;
+        }
+
+        setTimeout(move, 30);
+      }
+
+      var deg = 0;
+      function rotate() {
+        kt.rotate($boosie, deg--);
+        setTimeout(rotate, kt.randInt(20, 10));
+      }
+
+      boosie.addEventListener('ended', function() {
+        if (boosie.playbackRate > 0.125)
+          boosie.playbackRate = boosie.playbackRate * 0.5;
+        else
+          boosie.playbackRate = 1;
+      });
+
     }
 
     function factoryit() {
-      //factory.play();
+      $factory.show();
+      factory.loop = true;
+      factory.playbackRate = 4;
+      var right = 40;
+      var movinleft = true;
+      factory.play();
+      move();
+      rotate();
+
+      function move() {
+        $factory.css('right', right + 'px');
+        if(movinleft) {
+          right += 3;
+          if (right >= $(window).width() - $factory.width() - 10)
+            movinleft = false;
+        } else {
+          right -= 3;
+          if (right <= 40)
+            movinleft = true;
+        }
+
+        setTimeout(move, 30);
+      }
+
+      var deg = 0;
+      function rotate() {
+        kt.rotate($factory, deg++);
+        setTimeout(rotate, kt.randInt(20, 10));
+      }
+
+      factory.addEventListener('ended', function() {
+        if (factory.playbackRate < 32)
+          factory.playbackRate = factory.playbackRate * 2;
+        else
+          factory.playbackRate = 4;
+      });
+
     }
 
     function startMoney() {
       scroogeit();
       setTimeout(boosieit, 30000);
-      setTimeout(factoryit, 50000);
+      setTimeout(factoryit, 30000);
     }
 
   }

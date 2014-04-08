@@ -70,10 +70,18 @@ body {
 
 #factory {
   display: none;
+  position: fixed;
+  width: 600px;
+  top: 150px;
+  opacity: 0.9;
 }
 
 #boosie {
   display: none;
+  position: fixed;
+  width: 600px;
+  top: 150px;
+  opacity: 0.9;
 }
 
 .debug-timer {
