@@ -471,7 +471,9 @@ $(function() {
   var P2_ENTER = 10000;
   var P1_EFFECTS = 18000;
   var P3_ENTER = 36000;
-  var MONEY_TIME = 10000;
+  var MONEY_TIME = 80000;
+  var PIG_REENTRANCE = 150000;
+  var CHILLTIME = 200000;
 
   pig1.addEventListener('canplaythrough', mediaReady);
   pig2.addEventListener('canplaythrough', mediaReady);
@@ -500,6 +502,8 @@ $(function() {
     setTimeout(startPig3, P3_ENTER);
     setTimeout(flickerPig1, P1_DUR);
     setTimeout(startMoney, MONEY_TIME);
+    setTimeout(resurrectPigs, PIG_REENTRANCE);
+    setTimeout(chillout, CHILLTIME);
 
     soundControl();
     speedControl();
@@ -713,6 +717,25 @@ $(function() {
     flicker();
   }
 
+  var flashed;
+  function flash(color, cb) {
+    flashed = 0;
+
+    function doflash() {
+      $('body').css('background-color', color);
+      setTimeout(function() {
+        $('body').css('background-color', 'black');
+        flashed++;
+        if (flashed < 7)
+          setTimeout(doflash, 200);
+        else
+          cb();
+      }, 200);
+    }
+
+    doflash();
+  }
+
   function startMoney() {
     function stopPigs() {
       pig1.pause();
@@ -726,21 +749,14 @@ $(function() {
       spactive = false;
     }
 
-    var flashed = 0;
-    function flash() {
-      $('body').css('background-color', 'red');
-      setTimeout(function() {
-        $('body').css('background-color', 'black');
-        flashed++;
-        if (flashed < 7)
-          setTimeout(flash, 200);
-        else
-          startMoney();
-      }, 200);
+    function startVids() {
+      scroogeit();
+      setTimeout(boosieit, 30000);
+      setTimeout(factoryit, 30000);
     }
 
     stopPigs();
-    flash();
+    flash('red', startVids);
 
     function scroogeit() {
       $scrooge.show();
@@ -773,8 +789,8 @@ $(function() {
         }, kt.randInt(1000, 300));
       }
 
-      setTimeout(scroogeWarp, 18000);
-      setTimeout(scroogeInvert, 18000);
+      setTimeout(scroogeWarp, 12000);
+      setTimeout(scroogeInvert, 12000);
     }
 
     function boosieit() {
@@ -866,15 +882,73 @@ $(function() {
 
     }
 
-    function startMoney() {
-      scroogeit();
-      setTimeout(boosieit, 30000);
-      setTimeout(factoryit, 30000);
-    }
-
   }
 
   function resurrectPigs() {
+    factory.pause();
+    boosie.pause();
+    scrooge.pause();
+    $factory.hide();
+    $boosie.hide();
+    $scrooge.hide();
+    $scrooge.css('opacity', 0.6);
+    $boosie.css('opacity', 0.5);
+    $factory.css('opacity', 0.5);
+    $pig2.css('opacity', 0.5);
+    $spig.css('opacity', 0.5);
+
+    flashed = 0;
+    flash('yellow', bringemback);
+
+    function bringemback() {
+      $spig.show();
+      $pig1.show();
+      $pig2.show();
+      p1active = true;
+      p2active = true;
+      spactive = true;
+      pig1.play();
+      flickerPig1();
+      startPig2();
+      startPig3();
+      $factory.show();
+      $boosie.show();
+      $scrooge.show();
+      factory.play();
+      boosie.play();
+      scrooge.play();
+
+    }
+  }
+
+  function chillout() {
+    $spig.hide();
+    spig.pause();
+    spactive = false;
+
+    $factory.hide();
+    factory.pause();
+
+    $boosie.hide();
+    boosie.pause();
+
+    p2active = false;
+    pig2.currentTime = 1;
+    pig2.playbackRate = 0.1;
+    $pig2.css('width', '50%');
+    $pig2.css('left', '0');
+
+    $scrooge.css('width', '50%');
+
+    setTimeout(function() {
+      $pig2.hide();
+      pig2.pause();
+
+      $scrooge.hide();
+      scrooge.pause();
+    }, 20000);
+
+
 
   }
 

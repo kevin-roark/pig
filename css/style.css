@@ -71,7 +71,7 @@ body {
 #factory {
   display: none;
   position: fixed;
-  width: 600px;
+  width: 420px;
   top: 150px;
   opacity: 0.9;
 }
@@ -79,7 +79,7 @@ body {
 #boosie {
   display: none;
   position: fixed;
-  width: 600px;
+  width: 420px;
   top: 150px;
   opacity: 0.9;
 }
