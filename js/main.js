@@ -334,8 +334,8 @@ $(function() {
           kt.scale($scrooge, Math.random() * 0.5);
         } else {
           var s = Math.random() * 10;
-          var xp = kt.randInt(100) - 50;
-          var yp = kt.randInt(100) - 50;
+          var xp = kt.randInt(20) - 10;
+          var yp = kt.randInt(20) - 10;
           kt.slaw($scrooge, s, xp + '%', yp + '%');
         }
 
@@ -497,9 +497,9 @@ $(function() {
 
     p2active = false;
     pig2.currentTime = 1;
-    pig2.playbackRate = 0.1;
-    $pig2.css('width', '50%');
-    $pig2.css('left', '0');
+    pig2.playbackRate = 0.3;
+    $pig2.css('height', '100%');
+    $pig2.css('left', '25%');
 
     $scrooge.css('width', '50%');
 
