@@ -80,8 +80,16 @@ $(function() {
   function endgame() {
 
     function restart() {
-      kt.clearTransforms($vid);
-      kt.clearFilters($vid);
+      function clean(vid) {
+        kt.clearTransforms(vid);
+        kt.clearFilters(vid);
+      }
+      clean($pig1);
+      clean($pig2);
+      clean($spig);
+      clean($boosie);
+      clean($factory);
+      clean($scrooge);
 
       //audio.currentTime = 0;
       pig1.currentTime = 0;
