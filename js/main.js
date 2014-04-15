@@ -338,7 +338,6 @@ $(function() {
       scrooge.loop = true;
 
       function scroogeWarp() {
-        // maybe add translation as well
         var p = Math.random();
         if (p < 0.05) { //small
           kt.scale($scrooge, Math.random() * 0.5);
