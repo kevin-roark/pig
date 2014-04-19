@@ -75,7 +75,7 @@ $(function() {
     speedControl();
 
     setInterval(function() {
-      $('.debug-timer').html(audio.currentTime);
+      //$('.debug-timer').html(audio.currentTime);
     }, 200);
   }
 

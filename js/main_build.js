@@ -511,7 +511,7 @@ $(function() {
     speedControl();
 
     setInterval(function() {
-      $('.debug-timer').html(audio.currentTime);
+      //$('.debug-timer').html(audio.currentTime);
     }, 200);
   }
 
@@ -774,7 +774,6 @@ $(function() {
       scrooge.loop = true;
 
       function scroogeWarp() {
-        // maybe add translation as well
         var p = Math.random();
         if (p < 0.05) { //small
           kt.scale($scrooge, Math.random() * 0.5);
@@ -799,8 +798,8 @@ $(function() {
         }, kt.randInt(1000, 300));
       }
 
-      setTimeout(scroogeWarp, 16000);
-      setTimeout(scroogeInvert, 16000);
+      setTimeout(scroogeWarp, 24000);
+      setTimeout(scroogeInvert, 24000);
     }
 
     function boosieit() {
