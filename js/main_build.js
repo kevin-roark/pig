@@ -459,7 +459,7 @@ $(function() {
   var audio = document.querySelector('#audio');
   var $aud = $(audio);
 
-  var numMedia = 7; // number of things to load
+  var numMedia = 7 + 1; // number of things to load plus keypress
   var mediasReady = 0;
 
   var p1active = false;
@@ -485,6 +485,11 @@ $(function() {
   factory.addEventListener('canplaythrough', mediaReady);
   audio.addEventListener('canplaythrough', mediaReady);
 
+  $(document).keypress(function(ev) {
+    if (ev.keyCode == 115) // the 's' key
+      mediaReady();
+  });
+
   function mediaReady() {
     mediasReady++;
     if (mediasReady == numMedia) {
@@ -497,7 +502,7 @@ $(function() {
     pig1.play();
     p1active = true;
 
-    setTimeout(hideFooter, 1000);
+    setTimeout(hideFooter, 100);
     setTimeout(startPig2, P2_ENTER);
     setTimeout(pig1Effects, P1_EFFECTS);
     setTimeout(startPig3, P3_ENTER);
@@ -509,10 +514,6 @@ $(function() {
 
     soundControl();
     speedControl();
-
-    setInterval(function() {
-      //$('.debug-timer').html(audio.currentTime);
-    }, 200);
   }
 
   function endgame() {
@@ -529,7 +530,7 @@ $(function() {
       clean($factory);
       clean($scrooge);
 
-      //audio.currentTime = 0;
+      audio.currentTime = 0;
       pig1.currentTime = 0;
       pig2.currentTime = 0;
       spig.currentTime = 0;
@@ -544,9 +545,6 @@ $(function() {
       $('.footer').unbind('mouseenter');
       $('.footer').unbind('mouseleave');
     }
-
-    showFooter();
-    setTimeout(restart, 5000);
   }
 
   function hideFooter() {
