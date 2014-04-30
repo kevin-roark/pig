@@ -93,7 +93,7 @@ $(function() {
       clean($factory);
       clean($scrooge);
 
-      //audio.currentTime = 0;
+      audio.currentTime = 0;
       pig1.currentTime = 0;
       pig2.currentTime = 0;
       spig.currentTime = 0;
